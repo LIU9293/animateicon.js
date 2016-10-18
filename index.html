@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <title>animateicon.js</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <style>
+      #wapper {position: absolute; left: 0; height: 100px; width: 100px; overflow: hidden}
+      #heart {position: absolute; left: 0; height: 100px; width: 100px; overflow: hidden}
+    </style>
+    <script src="./index.js"></script>
+  </head>
+  <body>
+    <div>
+      <div id="wapper">
+        <div id="icon"></div>
+      </div>
+    </div>
+    <script>
+      var icon = document.getElementById('icon');
+      icon.Animate({
+        type: 'star',
+        onPressed: function(){
+          console.log('收藏');
+        },
+        onReleased: function(){
+          console.log('取消收藏');
+        }
+      })
+    </script>
+  </body>
+</html>
