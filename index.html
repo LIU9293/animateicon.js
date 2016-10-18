@@ -2,23 +2,55 @@
   <head>
     <title>animateicon.js</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
     <style>
       #wapper {position: absolute; left: 0; height: 100px; width: 100px; overflow: hidden}
       #heart {position: absolute; left: 0; height: 100px; width: 100px; overflow: hidden}
+      .selecter{position: absolute;margin-top: 300px;}
+      .normal{display: inline-block;display: inline-block;padding: 20px 10px;border: 1px solid #ccc;cursor: pointer;}
+      .selected{border: 1px solid #f35626;}
+      .other{margin-left: -4px;}
     </style>
     <script src="./index.js"></script>
+    <script>
+      $(document).ready(function(){
+          $(".normal").bind("click",function() {
+            $(this).addClass("selected").siblings().removeClass("selected")
+            var obj = $("#icon")
+            var htmlArr = $(this).html().split('_')
+            obj.Animate({
+              name : htmlArr[0],
+              type : htmlArr[1],
+              onPressed: function(){
+                console.log('收藏');
+              },
+              onReleased: function(){
+                console.log('取消收藏');
+              }
+            })
+          })
+      })
+    </script>
   </head>
   <body>
     <div>
       <div id="wapper">
         <div id="icon"></div>
       </div>
-      <div></div>
+      <div class="selecter">
+        <div class="normal selected">collect_1</div>
+        <div class="normal other">collect_2</div>
+        <div class="normal other">collect_3</div>
+        <div class="normal other">like_1</div>
+        <div class="normal other">like_2</div>
+        <div class="normal other">like_3</div>
+      </div>
     </div>
     <script>
       var icon = document.getElementById('icon');
       icon.Animate({
-        type: 'star',
+        name: 'collect',
+        type: 1,
         onPressed: function(){
           console.log('收藏');
         },
