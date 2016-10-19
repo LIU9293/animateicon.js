@@ -1,7 +1,3 @@
-var star = `<img id="animate-star" style="position: absolute;" src="collect_1_5100w_100h.png"/>`;
-this.innerHTML = star;
-
-
 function LoadNetImages(callback) {
   var APIurl = 'https://api.github.com/repos/liu9293/animateicon.js/contents/icons';
   var images = {};

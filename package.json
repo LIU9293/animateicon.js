@@ -2,10 +2,19 @@
   "name": "animateicon.js",
   "version": "0.1.0",
   "description": "collection of animated icons that ready to use",
-  "main": "index.js",
+  "main": "./dist/bundle.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Lock",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.16.0",
+    "webpack": "^1.13.2"
+  },
+  "dependencies": {
+    "whatwg-fetch": "^1.0.0"
+  }
 }
