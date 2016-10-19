@@ -4,8 +4,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
     <style>
-      #wapper {position: absolute; left: 0; height: 100px; width: 100px; overflow: hidden}
-      #heart {position: absolute; left: 0; height: 100px; width: 100px; overflow: hidden}
+      #wapper {position: absolute; left: 0; height: 80px; width: 80px; overflow: hidden}
+      #icon {position: absolute; left: 0; height: 80px; width: 80px; overflow: hidden}
       .selecter{position: absolute;margin-top: 300px;}
       .normal{display: inline-block;display: inline-block;padding: 20px 10px;border: 1px solid #ccc;cursor: pointer;}
       .selected{border: 1px solid #f35626;}
@@ -48,7 +48,7 @@
     </div>
     <script>
       var icon = document.getElementById('icon');
-      icon.Animate({
+      icon.AnimateIcon({
         name: 'collect',
         type: 1,
         onPressed: function(){

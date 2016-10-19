@@ -499,7 +499,85 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	document.write(_images2.default);
+	var Images = [];
+
+	Object.prototype.AnimateIconObject = {
+	  init: function init(opt, dom) {
+	    var _this = this;
+
+	    var options = this.getOptions(opt);
+	    if (Images.length == 0) {
+	      (0, _images2.default)().then(function (res) {
+	        Images = res;
+	        _this.insertImage(options, dom);
+	      }).catch(function (err) {
+	        return console.log(err);
+	      });
+	    } else {
+	      this.insertImage(options);
+	    }
+	  },
+	  getOptions: function getOptions(options) {
+	    return {
+	      size: options.size || 80,
+	      name: options.name || 'like',
+	      type: options.type || 1,
+	      onPressCallback: options.onPressCallback || function () {},
+	      onReleaseCallback: options.onReleaseCallback || function () {}
+	    };
+	  },
+	  insertImage: function insertImage(options, dom) {
+	    var img = '';
+	    var steps = 1;
+	    var uid = null;
+	    Images.map(function (item, ii) {
+	      if (item.name == options.name && item.type == options.type) {
+	        var height = item.height,
+	            width = item.width;
+	        var imgWidth = width / height * options.size;
+	        var uuid = Math.floor(new Date().getTime() * Math.random() * 100);
+	        uid = uuid;
+	        steps = width / height;
+	        img = '<img class="animate-icon" style="position: absolute; height: ' + options.size + ';\n        width: ' + imgWidth + '" id="' + uuid + '" src="' + item.url + '"/>';
+	      }
+	    });
+	    dom.innerHTML = img;
+	    this.setupClick(dom, uid, options.size, steps);
+	  },
+	  setupClick: function setupClick(dom, uid, size, steps) {
+
+	    var img = document.getElementById(uid.toString());
+
+	    var move = function move() {
+	      img.style.left = '0px';
+	      dom.removeEventListener('click', move);
+	      var t = setInterval(function () {
+	        var left = parseInt(img.style.left.replace('px', ''));
+	        if (left > -size * (steps - 1)) {
+	          console.log(left);
+	          img.style.left = left - size + 'px';
+	        } else {
+	          clearInterval(t);
+	          dom.addEventListener('click', remove);
+	        }
+	      }, 20);
+	    };
+
+	    var remove = function remove() {
+	      img.style.left = '0px';
+	      dom.removeEventListener('click', remove);
+	      dom.addEventListener('click', move);
+	    };
+
+	    dom.addEventListener('click', move);
+	  }
+	};
+
+	Object.prototype.AnimateIcon = function (options) {
+
+	  //把DOM节点传递到init函数里面...
+	  this.AnimateIconObject.init(options, this);
+	};
 
 /***/ },
 /* 3 */
@@ -509,15 +587,34 @@
 
 	__webpack_require__(1);
 
-	fetch('https://api.github.com/repos/liu9293/animateicon.js/contents/icons').then(function (res) {
-	  return res.json();
-	}).then(function (ress) {
-	  return console.log(ress);
-	}).catch(function (err) {
-	  return console.log(err);
-	});
+	var getImages = function getImages() {
+	  return new Promise(function (resolve, reject) {
+	    fetch('https://api.github.com/repos/liu9293/animateicon.js/contents/icons').then(function (res) {
+	      return res.json();
+	    }).then(function (ress) {
+	      var images = ress.map(function (item, ii) {
+	        var nameArr = item.name.replace('.png', '').split('_');
+	        var name = nameArr[0],
+	            type = parseInt(nameArr[1]),
+	            width = parseInt(nameArr[2].replace('w', '')),
+	            height = parseInt(nameArr[3].replace('h', ''));
+	        var pic = {
+	          name: name,
+	          type: type,
+	          width: width,
+	          height: height,
+	          url: item.download_url
+	        };
+	        return pic;
+	      });
+	      resolve(images);
+	    }).catch(function (err) {
+	      return reject(err);
+	    });
+	  });
+	};
 
-	module.exports = 'hello ES6';
+	module.exports = getImages;
 
 /***/ }
 /******/ ]);
