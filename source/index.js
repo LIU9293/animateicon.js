@@ -14,7 +14,7 @@ HTMLElement.prototype.AnimateIconObject = {
         })
         .catch(err => console.log(err))
     } else {
-      this.insertImage(options);
+      this.insertImage(options, dom);
     }
   },
 

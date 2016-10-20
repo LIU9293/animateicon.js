@@ -514,7 +514,7 @@
 	        return console.log(err);
 	      });
 	    } else {
-	      this.insertImage(options);
+	      this.insertImage(options, dom);
 	    }
 	  },
 	  getOptions: function getOptions(options) {
@@ -554,7 +554,6 @@
 	      var t = setInterval(function () {
 	        var left = parseInt(img.style.left.replace('px', ''));
 	        if (left > -size * (steps - 1)) {
-	          console.log(left);
 	          img.style.left = left - size + 'px';
 	        } else {
 	          clearInterval(t);

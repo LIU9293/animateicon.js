@@ -14,7 +14,7 @@ $.getJSON('https://api.github.com/repos/liu9293/animateicon.js/contents/icons', 
     html = html + str;
   }
 
-  $('#images').html(html);
+  $('#coverflow').html(html);
 
   for(var i = 0; i < images.length; i ++){
     console.log(images[i]);
@@ -25,15 +25,24 @@ $.getJSON('https://api.github.com/repos/liu9293/animateicon.js/contents/icons', 
     })
   }
 
-  var length = images.length, ii = 0;
+  // var length = images.length, ii = 0;
+  //
+  // var t = setInterval(function(){
+  //   if(ii == length){
+  //     clearInterval(t);
+  //   } else {
+  //     $(`#icon-${ii}`)[0].click();
+  //     ii ++;
+  //   }
+  // }, 500)
 
-  var t = setInterval(function(){
-    if(ii == length){
-      clearInterval(t);
-    } else {
-      $(`#icon-${ii}`)[0].click();
-      ii ++;
-    }
-  }, 500)
+  $(function() {
+    $('#coverflow').coverflow({
+        active: 1,
+        select: function(event, ui){
+            console.log('here');
+        }
+    });
+  });
 
 });

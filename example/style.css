@@ -2,10 +2,14 @@ body{
   margin: 0; padding: 0;
   font-family: "Helvetica Neue","Helvetica","Lucida Grande","Arial","Microsoft Yahei","WenQuanYi Micro Hei","sans-serif";
 }
-#images{
+#main{
+  min-height: 300px;
+}
+.images{
   text-align: center;
-  margin-top: 50px;
+  margin-top: 150px;
   width: 600px;
+  height: 150px;
   margin-left:auto; margin-right: auto;
 }
 .animateImage{
