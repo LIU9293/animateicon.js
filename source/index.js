@@ -2,7 +2,7 @@ import getImages from './images';
 
 var Images = [];
 
-Object.prototype.AnimateIconObject = {
+HTMLElement.prototype.AnimateIconObject = {
 
   init(opt, dom){
     var options = this.getOptions(opt);
@@ -41,7 +41,7 @@ Object.prototype.AnimateIconObject = {
         uid = uuid;
         steps = width/height;
         img = `<img class="animate-icon" style="position: absolute; height: ${options.size};
-        width: ${imgWidth}" id="${uuid}" src="${item.url}"/>`
+        width: ${imgWidth}; left: 0px" id="${uuid}" src="${item.url}"/>`
       }
     });
     dom.innerHTML = img;
@@ -58,7 +58,6 @@ Object.prototype.AnimateIconObject = {
       var t = setInterval(() => {
         var left  = parseInt(img.style.left.replace('px',''));
         if(left > -size*(steps-1)){
-          console.log(left);
           img.style.left = left - size + 'px';
         } else {
           clearInterval(t);
@@ -79,9 +78,8 @@ Object.prototype.AnimateIconObject = {
 
 }
 
-Object.prototype.AnimateIcon = function(options){
+HTMLElement.prototype.AnimateIcon = function(options){
 
-  //把DOM节点传递到init函数里面...
   this.AnimateIconObject.init(options, this)
 
 }

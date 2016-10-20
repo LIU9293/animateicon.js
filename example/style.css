@@ -1,0 +1,18 @@
+body{
+  margin: 0; padding: 0;
+  font-family: "Helvetica Neue","Helvetica","Lucida Grande","Arial","Microsoft Yahei","WenQuanYi Micro Hei","sans-serif";
+}
+#images{
+  text-align: center;
+  margin-top: 50px;
+  width: 600px;
+  margin-left:auto; margin-right: auto;
+}
+.animateImage{
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  text-align: center;
+  display: inline-block;
+  position: relative;
+}

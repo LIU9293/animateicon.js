@@ -501,7 +501,7 @@
 
 	var Images = [];
 
-	Object.prototype.AnimateIconObject = {
+	HTMLElement.prototype.AnimateIconObject = {
 	  init: function init(opt, dom) {
 	    var _this = this;
 
@@ -522,8 +522,8 @@
 	      size: options.size || 80,
 	      name: options.name || 'like',
 	      type: options.type || 1,
-	      onPressCallback: options.onPressCallback || function () {},
-	      onReleaseCallback: options.onReleaseCallback || function () {}
+	      onPressed: options.onPressed || function () {},
+	      onReleased: options.onReleased || function () {}
 	    };
 	  },
 	  insertImage: function insertImage(options, dom) {
@@ -538,7 +538,7 @@
 	        var uuid = Math.floor(new Date().getTime() * Math.random() * 100);
 	        uid = uuid;
 	        steps = width / height;
-	        img = '<img class="animate-icon" style="position: absolute; height: ' + options.size + ';\n        width: ' + imgWidth + '" id="' + uuid + '" src="' + item.url + '"/>';
+	        img = '<img class="animate-icon" style="position: absolute; height: ' + options.size + ';\n        width: ' + imgWidth + '; left: 0px" id="' + uuid + '" src="' + item.url + '"/>';
 	      }
 	    });
 	    dom.innerHTML = img;
@@ -573,9 +573,8 @@
 	  }
 	};
 
-	Object.prototype.AnimateIcon = function (options) {
+	HTMLElement.prototype.AnimateIcon = function (options) {
 
-	  //把DOM节点传递到init函数里面...
 	  this.AnimateIconObject.init(options, this);
 	};
 
